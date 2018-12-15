@@ -7,14 +7,29 @@ class Department(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
 
-class Employee(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    department = models.ForeignKey(Department, on_delete=models.PROTECT, null=True, blank=True)
-    job_title = models.CharField(max_length=20, null=True, blank=True)
-    report_to = models.ForeignKey('self', on_delete=models.PROTECT, null=True, blank=True)
-    start_date = models.DateField(default=datetime.date.today)
-    left_date = models.DateField(default=datetime.date.today, null=True, blank=True)
+
+class JobTitle(models.Model):
+    name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Employee(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
+    job_title = models.ForeignKey(JobTitle, on_delete=models.PROTECT, null=True, blank=True)
+    report_to = models.ForeignKey('self', on_delete=models.PROTECT, null=True, blank=True)
+    join_date = models.DateField(default=datetime.date.today)
+    left_date = models.DateField(default=None, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
