@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang=en class="h-100">
+<head>
+<meta charset="utf-8">
+<title>{% block head_title %}Human Resources management{% endblock head_title %}</title>
+
+{% block extra_meta %}{% endblock extra_meta %}
+
+{% include 'snippets/css.html' %}
+{% block extra_css %}{% endblock extra_css %}
+</head>
+<body>
+
+{% block content %}{% endblock content %}
+
+{% include 'snippets/js.html' %}
+{% block extra_js %}{% endblock extra_js %}
+</body>
+</html>
