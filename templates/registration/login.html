@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Login</h2>
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    <form method="post" class="mt-2 mb-2">
+    {% csrf_token %}
+    <div class="form-group row">
+        <div class="col-2">{{ form.username.label_tag }}</div>
+        <div class="col-10">
+            {{ form.username }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">{{ form.password.label_tag }}</div>
+        <div class="col-10">
+            {{ form.password }}
+        </div>
+    </div>
+    <input type="submit" value="Login" class="btn btn-dark mt-2 mb-2" />
+    </form>
+</div>
+{% endblock %}
