@@ -1,10 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block head_title %}Employee Search{% endblock head_title %}
 
 {% block content %}
-    <div class="container">
-        {% load static %}
-        <h3>Employee Search</h3>
+    <div id="content" class="container mt-4">
+        <h3 class="text-center">Search Employees</h3>
+        <div class="text-right">
+            <button class="btn btn-dark"><i class="fas fa-user-plus"></i></button>
+        </div>
+        <div>
+            <h4>Find by Name</h4>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control">
+                </div>
+            </form>
+        </div>
+        <div>
+            <h4>Find by Departments</h4>
+            <ul>
+                <li v-for="department in departments"><a href="#">${department.name}</a></li>
+            </ul>
+            <div><a href="#">Manage departments</a></div>
+        </div>
     </div>
 {% endblock content %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/employee_search.js' %}"></script>
+{% endblock extra_js %}
