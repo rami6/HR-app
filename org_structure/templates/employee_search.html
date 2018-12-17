@@ -8,7 +8,7 @@
         <div class="text-right"><a href="{% url 'logout' %}">Logout</a></div>
         <h3 class="text-center">Search Employees</h3>
         <div class="text-right">
-            <button class="btn btn-dark"><i class="fas fa-user-plus"></i></button>
+            <button class="btn btn-dark" data-toggle="modal" data-target="#addEmployeeModal"><i class="fas fa-user-plus"></i></button>
         </div>
         <div>
             <h4>Find by Name</h4>
@@ -25,6 +25,8 @@
             </ul>
             <div><a href="#">Manage departments</a></div>
         </div>
+
+        {% include 'snippets/add_employee_modal.html' %}
     </div>
 {% endblock content %}
 

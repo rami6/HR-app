@@ -6,20 +6,62 @@ new Vue({
   delimiters: ['${', '}'],
   data: {
     departments: [],
+    jobTitles: [],
+    newEmployee: {
+      first_name: '',
+      last_name: '',
+      department: '',
+      job_title: '',
+      join_date: '',
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.getDepartments();
+    this.getJobTitles();
+    this.newEmployee.join_date = this.getToday();
   },
   methods: {
-    getDepartments: function() {
+    getDepartments: function () {
       axios.get('/api/department/')
         .then((response) => {
           this.departments = response.data;
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    }
+    },
+    getJobTitles: function () {
+      axios.get('/api/job-title/')
+        .then((response) => {
+          this.jobTitles = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    addNewEmployee: function() {
+      axios.post('/api/employee/', this.newEmployee)
+        .then((response) => {
+          $('#addEmployeeModal').modal('toggle');
+          this.newEmployee = {
+            first_name: '',
+            last_name: '',
+            department: '',
+            job_title: '',
+            join_date: '',
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getToday: function () {
+      const toTwoDigits = num => num < 10 ? '0' + num : num;
+      let today = new Date();
+      let year = today.getFullYear();
+      let month = toTwoDigits(today.getMonth() + 1);
+      let day = toTwoDigits(today.getDate());
+      return `${year}-${month}-${day}`;
+    },
   }
 });
