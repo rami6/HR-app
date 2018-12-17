@@ -25,7 +25,6 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=30)
     department = models.ForeignKey(Department, on_delete=models.PROTECT)
     job_title = models.ForeignKey(JobTitle, on_delete=models.PROTECT)
-    report_to = models.ForeignKey('self', on_delete=models.PROTECT, null=True, blank=True)
     join_date = models.DateField(default=datetime.date.today)
     left_date = models.DateField(default=None, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

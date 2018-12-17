@@ -30,8 +30,8 @@
                         {% endif %}
                     </div>
                 </form>
-                <div id="employee-list" class="flex-grow-1">
-                    <div class="row pt-1 pb-1" v-for="employee in employees">
+                <div id="employee-list">
+                    <div class="row pt-1 pb-1" v-for="employee in employees" class="flex-grow-1" data-toggle="modal" data-target="#employeeDetailsModal" @click="getSelectedEmployee(employee.id)">
                         <div class="col-4">${employee.first_name} ${employee.last_name}</div>
                         <div class="col-4">${employee.department.name}</div>
                         <div class="col-4">${employee.job_title.name}</div>
@@ -41,6 +41,8 @@
         </div>
         {% if request.user.is_superuser %}
             {% include 'snippets/add_employee_modal.html' %}
+            {% include 'snippets/details_editable_modal.html' %}
+            {% include 'snippets/delete_confirmation_modal.html' %}
         {% endif %}
     </div>
 {% endblock content %}
