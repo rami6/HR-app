@@ -43,6 +43,8 @@
             {% include 'snippets/add_employee_modal.html' %}
             {% include 'snippets/details_editable_modal.html' %}
             {% include 'snippets/delete_confirmation_modal.html' %}
+        {% else %}
+            {% include 'snippets/details_read_only_modal.html' %}
         {% endif %}
     </div>
 {% endblock content %}

@@ -24,6 +24,10 @@ new Vue({
       join_date: '',
       left_date: '',
     },
+    selectedEmployeeExtraInfo: {
+      department_name: '',
+      job_title_name: '',
+    },
     keyword: '',
   },
   mounted: function() {
@@ -72,6 +76,10 @@ new Vue({
             join_date: data.join_date,
             left_date: data.left_date,
           };
+          this.selectedEmployeeExtraInfo = {
+            department_name: data.department.name,
+            job_title_name: data.job_title.name,
+          }
         })
         .catch((error) => {
           console.log(error);

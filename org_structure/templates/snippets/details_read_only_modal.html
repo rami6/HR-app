@@ -1,0 +1,41 @@
+<div class="modal fade" id="employeeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="employeeDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeDetailsModalLabel">Employee Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-2">
+                    <div class="col-3">First name:</div>
+                    <div class="col-9">${selectedEmployee.first_name}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">Last name:</div>
+                    <div class="col-9">${selectedEmployee.last_name}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">Department:</div>
+                    <div class="col-9">${selectedEmployeeExtraInfo.department_name}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">Job title:</div>
+                    <div class="col-9">${selectedEmployeeExtraInfo.job_title_name}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">Join date:</div>
+                    <div class="col-9">${selectedEmployee.join_date}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3">Left date:</div>
+                    <div class="col-9">${selectedEmployee.left_date}</div>
+                </div>
+                <div class="modal-footer pl-0 pr-0 pb-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
