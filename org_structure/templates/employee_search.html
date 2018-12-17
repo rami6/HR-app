@@ -3,30 +3,40 @@
 
 {% block head_title %}Employee Search{% endblock head_title %}
 
-{% block content %}
-    <div id="content" class="container">
-        <div class="text-right"><a href="{% url 'logout' %}">Logout</a></div>
-        <h3 class="text-center">Search Employees</h3>
-        <div class="text-right">
-            <button class="btn btn-dark" data-toggle="modal" data-target="#addEmployeeModal"><i class="fas fa-user-plus"></i></button>
-        </div>
-        <div>
-            <h4>Find by Name</h4>
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control">
-                </div>
-            </form>
-        </div>
-        <div>
-            <h4>Find by Departments</h4>
-            <ul>
-                <li v-for="department in departments"><a href="#">${department.name}</a></li>
-            </ul>
-            <div><a href="#">Manage departments</a></div>
-        </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/employee_search.css' %}">
+{% endblock extra_css %}
 
-        {% include 'snippets/add_employee_modal.html' %}
+{% block content %}
+    <div id="content" class="container d-flex flex-column">
+        <div class="text-right"><a href="{% url 'logout' %}">Logout</a></div>
+        <h3>Search Employees</h3>
+        <div class="row mt-3 flex-grow-1">
+            <div class="col-4">
+                <div>Departments</div>
+                <ul>
+                    <li v-for="department in departments"><a href="#">${department.name}</a></li>
+                </ul>
+                {% if request.user.is_superuser %}
+                <div><a href="#">Manage departments</a></div>
+                {% endif %}
+            </div>
+            <div class="col-8 d-flex flex-column flex-grow-1">
+                <form>
+                    <div class="form-group form-inline">
+                        <input type="text" class="form-control flex-grow-1" placeholder="Enter name">
+                        {% if request.user.is_superuser %}
+                            <button type="button" class="btn btn-dark ml-2" data-toggle="modal" data-target="#addEmployeeModal"><i class="fas fa-user-plus"></i></button>
+                        {% endif %}
+                    </div>
+                </form>
+                <div id="employee-list" class="flex-grow-1">
+                </div>
+            </div>
+        </div>
+        {% if request.user.is_superuser %}
+            {% include 'snippets/add_employee_modal.html' %}
+        {% endif %}
     </div>
 {% endblock content %}
 
