@@ -12,19 +12,19 @@
                     <div class="form-group row">
                         <label for="first-name" class="col-3 col-form-label">First name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="first-name" v-model="selectedEmployee.first_name">
+                            <input type="text" class="form-control" id="first-name" v-model="selectedEmployee.first_name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="last-name" class="col-3 col-form-label">Last name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="last-name" v-model="selectedEmployee.last_name">
+                            <input type="text" class="form-control" id="last-name" v-model="selectedEmployee.last_name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="department" class="col-3 col-form-label">Department:</label>
                         <div class="col-9">
-                            <select v-model="selectedEmployee.department" class="form-control" id="department">
+                            <select v-model="selectedEmployee.department" class="form-control" id="department" required>
                                 <option v-for="department in departments" :value="department.id">
                                     ${department.name}
                                 </option>
@@ -34,7 +34,7 @@
                     <div class="form-group row">
                         <label for="job-title" class="col-3 col-form-label">Job title:</label>
                         <div class="col-9">
-                            <select v-model="selectedEmployee.job_title" class="form-control" id="job-title">
+                            <select v-model="selectedEmployee.job_title" class="form-control" id="job-title" required>
                                 <option v-for="jobTitle in jobTitles" :value="jobTitle.id" >
                                     ${jobTitle.name}
                                 </option>
@@ -44,7 +44,7 @@
                     <div class="form-group row">
                         <label for="join-date" class="col-3 col-form-label">Join date:</label>
                         <div class="col-9">
-                            <input type="date" class="form-control" id="join-date" v-model="selectedEmployee.join_date">
+                            <input type="date" class="form-control" id="join-date" v-model="selectedEmployee.join_date" required>
                         </div>
                     </div>
                     <div class="form-group row">
