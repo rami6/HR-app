@@ -7,6 +7,7 @@ new Vue({
   data: {
     departments: [],
     jobTitles: [],
+    employees: [],
     newEmployee: {
       first_name: '',
       last_name: '',
@@ -18,6 +19,7 @@ new Vue({
   mounted: function () {
     this.getDepartments();
     this.getJobTitles();
+    this.getEmployees();
     this.newEmployee.join_date = this.getToday();
   },
   methods: {
@@ -34,6 +36,15 @@ new Vue({
       axios.get('/api/job-title/')
         .then((response) => {
           this.jobTitles = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getEmployees: function() {
+      axios.get('/api/employee/')
+        .then((response) => {
+          this.employees = response.data;
         })
         .catch((error) => {
           console.log(error);

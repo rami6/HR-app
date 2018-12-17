@@ -17,6 +17,8 @@ class JobTitleSerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
+    department = DepartmentSerializer(read_only=True)
+    job_title = JobTitleSerializer(read_only=True)
 
     class Meta:
         model = Employee

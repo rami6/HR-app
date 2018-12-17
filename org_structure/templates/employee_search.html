@@ -31,6 +31,11 @@
                     </div>
                 </form>
                 <div id="employee-list" class="flex-grow-1">
+                    <div class="row pt-1 pb-1" v-for="employee in employees">
+                        <div class="col-4">${employee.first_name} ${employee.last_name}</div>
+                        <div class="col-4">${employee.department.name}</div>
+                        <div class="col-4">${employee.job_title.name}</div>
+                    </div>
                 </div>
             </div>
         </div>
