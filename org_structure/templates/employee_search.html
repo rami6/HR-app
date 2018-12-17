@@ -22,9 +22,9 @@
                 {% endif %}
             </div>
             <div class="col-8 d-flex flex-column flex-grow-1">
-                <form>
+                <form @submit.prevent>
                     <div class="form-group form-inline">
-                        <input type="text" class="form-control flex-grow-1" placeholder="Enter name">
+                        <input type="text" class="form-control flex-grow-1" placeholder="Enter name" v-model="keyword" @keyup="searchEmployees">
                         {% if request.user.is_superuser %}
                             <button type="button" class="btn btn-dark ml-2" data-toggle="modal" data-target="#addEmployeeModal"><i class="fas fa-user-plus"></i></button>
                         {% endif %}

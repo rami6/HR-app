@@ -15,11 +15,11 @@ new Vue({
       job_title: '',
       join_date: '',
     },
+    keyword: '',
   },
   mounted: function () {
     this.getDepartments();
     this.getJobTitles();
-    this.getEmployees();
     this.newEmployee.join_date = this.getToday();
   },
   methods: {
@@ -41,8 +41,8 @@ new Vue({
           console.log(error);
         });
     },
-    getEmployees: function() {
-      axios.get('/api/employee/')
+    searchEmployees: function () {
+      axios.get(`/api/employee/?search=${this.keyword}`)
         .then((response) => {
           this.employees = response.data;
         })
