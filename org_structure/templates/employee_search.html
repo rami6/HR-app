@@ -18,7 +18,7 @@
                     <li v-for="department in departments"><a href="#">${department.name}</a></li>
                 </ul>
                 {% if request.user.is_superuser %}
-                <div><a href="#">Manage departments</a></div>
+                <div><a href="{% url 'department_manage' %}" target="_blank">Manage departments</a></div>
                 {% endif %}
             </div>
             <div class="col-8 d-flex flex-column flex-grow-1">

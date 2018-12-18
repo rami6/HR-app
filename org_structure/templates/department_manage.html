@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_title %}Manage Departments{% endblock head_title %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+    <div id="content" class="container">
+        <div class="text-right"><a href="{% url 'logout' %}">Logout</a></div>
+        <h3>Manage Departments</h3>
+        <div>
+            <ul>
+                <li v-for="department in departments"><a href="#">${department.name}</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/department_manage.js' %}"></script>
+{% endblock extra_js %}
