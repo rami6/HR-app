@@ -15,15 +15,7 @@ new Vue({
       job_title: '',
       join_date: '',
     },
-    selectedEmployee: {
-      id: '',
-      first_name: '',
-      last_name: '',
-      department: '',
-      job_title: '',
-      join_date: '',
-      left_date: '',
-    },
+    selectedEmployee: {},
     keyword: '',
   },
   mounted: function() {
@@ -59,26 +51,19 @@ new Vue({
           console.log(error.response);
         });
     },
-    getSelectedEmployee: function(employee_id) {
-      axios.get(`/api/employee/${employee_id}/`)
-        .then((response) => {
-          const data = response.data;
-          this.selectedEmployee = {
-            id: data.id,
-            first_name: data.first_name,
-            last_name: data.last_name,
-            department: data.department,
-            job_title: data.job_title,
-            join_date: data.join_date,
-            left_date: data.left_date,
-          };
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+    getSelectedEmployee: function(employee) {
+      this.selectedEmployee = employee;
     },
     updateEmployee: function() {
-      axios.put(`/api/employee/${this.selectedEmployee.id}/`, this.selectedEmployee)
+      const data = {
+        first_name: this.selectedEmployee.first_name,
+        last_name: this.selectedEmployee.last_name,
+        department: this.selectedEmployee.department,
+        job_title: this.selectedEmployee.job_title,
+        join_date: this.selectedEmployee.join_date,
+        left_date: this.selectedEmployee.left_date,
+      };
+      axios.put(`/api/employee/${this.selectedEmployee.id}/`, data)
         .then((response) => {
           $('#employeeDetailsModal').modal('toggle');
           this.searchEmployees();

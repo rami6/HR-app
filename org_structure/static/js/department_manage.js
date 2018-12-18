@@ -9,10 +9,7 @@ new Vue({
     newDepartment: {
       name: '',
     },
-    selectedDepartment: {
-      id: '',
-      name: '',
-    },
+    selectedDepartment: {},
     errorMessage: null,
   },
   mounted: function () {
@@ -33,18 +30,8 @@ new Vue({
           console.log(error.response);
         });
     },
-    getSelectedDepartment: function(department_id) {
-      axios.get(`/api/department/${department_id}/`)
-        .then((response) => {
-          const data = response.data;
-          this.selectedDepartment = {
-            id: data.id,
-            name: data.name,
-          };
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+    getSelectedDepartment: function(department) {
+      this.selectedDepartment = department;
     },
     addDepartment: function () {
       axios.post('/api/department/', this.newDepartment)
@@ -58,7 +45,10 @@ new Vue({
         });
     },
     updateDepartment: function() {
-      axios.put(`/api/department/${this.selectedDepartment.id}/`, this.selectedDepartment)
+      const data = {
+        name: this.selectedDepartment.name,
+      }
+      axios.put(`/api/department/${this.selectedDepartment.id}/`, data)
         .then((response) => {
           $('#departmentEditModal').modal('toggle');
           this.getDepartments();
