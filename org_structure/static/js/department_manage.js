@@ -6,6 +6,9 @@ new Vue({
   delimiters: ['${', '}'],
   data: {
     departments: [],
+    newDepartment: {
+      name: '',
+    },
     selectedDepartment: {
       id: '',
       name: '',
@@ -38,6 +41,17 @@ new Vue({
             id: data.id,
             name: data.name,
           };
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    },
+    addDepartment: function () {
+      axios.post('/api/department/', this.newDepartment)
+        .then((response) => {
+          $('#departmentAddModal').modal('toggle');
+          this.newDepartment = '';
+          this.getDepartments();
         })
         .catch((error) => {
           console.log(error.response);
