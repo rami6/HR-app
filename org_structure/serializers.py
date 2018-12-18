@@ -17,9 +17,15 @@ class JobTitleSerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    department = DepartmentSerializer(read_only=True)
-    job_title = JobTitleSerializer(read_only=True)
+    department_name = serializers.SerializerMethodField()
+    job_title_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Employee
-        exclude = ('created_at', 'updated_at')
+        fields = ['id', 'first_name', 'last_name', 'department', 'job_title', 'join_date', 'left_date', 'department_name', 'job_title_name']
+
+    def get_department_name(self, obj):
+        return obj.department.name
+
+    def get_job_title_name(self, obj):
+        return obj.job_title.name
