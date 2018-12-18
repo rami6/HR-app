@@ -26,9 +26,10 @@ class DepartmentViewSet(SuperUserEditableModelViewSet):
 class JobTitleViewSet(SuperUserEditableModelViewSet):
     queryset = JobTitle.objects.order_by('name')
     serializer_class = JobTitleSerializer
+    search_fields = ['name']
 
 
 class EmployeeViewSet(SuperUserEditableModelViewSet):
     queryset = Employee.objects.order_by('first_name', 'last_name')
     serializer_class = EmployeeSerializer
-    search_fields = ('first_name', 'last_name')
+    search_fields = ['first_name', 'last_name']

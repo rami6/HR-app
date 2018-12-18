@@ -17,6 +17,7 @@ new Vue({
     },
     selectedEmployee: {},
     keyword: '',
+    jobTitleKeyword: '',
   },
   mounted: function() {
     this.getDepartments();
@@ -41,6 +42,29 @@ new Vue({
         .catch((error) => {
           console.log(error.response);
         });
+    },
+    showJobTitleOptions: function() {
+      document.querySelector('#job-title-options').removeAttribute('style');
+    },
+    hideJobTitleOptions: function () {
+      setTimeout(
+        function() {
+          document.querySelector('#job-title-options').setAttribute('style', 'display: none;')
+        }, 300
+      )
+    },
+    searchJobTitleOptions: function () {
+      axios.get(`/api/job-title/?search=${this.jobTitleKeyword}`)
+        .then((response) => {
+          this.jobTitles = response.data;
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    },
+    setNewEmployeeJobTitle: function(jobTitle) {
+      this.newEmployee.job_title = jobTitle.id;
+      this.jobTitleKeyword = jobTitle.name;
     },
     searchEmployees: function() {
       axios.get(`/api/employee/?search=${this.keyword}`)
@@ -93,6 +117,7 @@ new Vue({
             job_title: '',
             join_date: '',
           };
+          this.jobTitleKeyword = '';
         })
         .catch((error) => {
           console.log(error.response);
