@@ -15,6 +15,7 @@ new Vue({
       job_title: '',
       join_date: '',
     },
+    selectedJobTitle: null,
     selectedEmployee: {},
     keyword: '',
     jobTitleKeyword: '',
@@ -62,11 +63,12 @@ new Vue({
           console.log(error.response);
         });
     },
-    setNewEmployeeJobTitle: function(jobTitle) {
-      this.newEmployee.job_title = jobTitle.id;
+    selectJobTitle: function(jobTitle) {
+      this.selectedJobTitle = jobTitle.id;
       this.jobTitleKeyword = jobTitle.name;
     },
     searchEmployees: function() {
+      this.selectedJobTitle = null;
       axios.get(`/api/employee/?search=${this.keyword}`)
         .then((response) => {
           this.employees = response.data;
@@ -107,6 +109,21 @@ new Vue({
           });
     },
     addEmployee: function() {
+      if (!this.selectedJobTitle) {
+        axios.post('/api/job-title/', {name: this.jobTitleKeyword})
+          .then((response) => {
+            this.newEmployee.job_title = response.data.id;
+            this.postEmployee();
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+      } else {
+        this.newEmployee.job_title = this.selectedJobTitle;
+        this.postEmployee();
+      }
+    },
+    postEmployee: function() {
       axios.post('/api/employee/', this.newEmployee)
         .then((response) => {
           $('#employeeAddModal').modal('toggle');
@@ -117,7 +134,10 @@ new Vue({
             job_title: '',
             join_date: '',
           };
+          this.newEmployee.join_date = this.getToday();
           this.jobTitleKeyword = '';
+          this.getJobTitles();
+          this.selectJobTitle = null;
         })
         .catch((error) => {
           console.log(error.response);

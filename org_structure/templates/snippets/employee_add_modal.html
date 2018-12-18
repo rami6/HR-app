@@ -38,7 +38,7 @@
                             <input type="text" v-model="jobTitleKeyword" class="form-control" id="job-title" autocomplete="off"
                                    @keyup="searchJobTitleOptions" @focus="showJobTitleOptions" @blur="hideJobTitleOptions" required>
                             <div id="job-title-options" class="autocomplete-items" style="display: none;">
-                                <div v-for="jobTitle in jobTitles" @click="setNewEmployeeJobTitle(jobTitle)" class="pl-1 pr-1 autocomplete-item">
+                                <div v-for="jobTitle in jobTitles" @click="selectJobTitle(jobTitle)" class="pl-1 pr-1 autocomplete-item">
                                     ${jobTitle.name}
                                 </div>
                             </div>
