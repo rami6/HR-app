@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from .models import Department, JobTitle, Employee
+from rest_framework.validators import UniqueValidator
 
 
 class DepartmentSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(validators=[UniqueValidator(queryset=Department.objects.all())]);
 
     class Meta:
         model = Department
@@ -10,6 +12,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
 
 
 class JobTitleSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(validators=[UniqueValidator(queryset=JobTitle.objects.all())]);
 
     class Meta:
         model = JobTitle
