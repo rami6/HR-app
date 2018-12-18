@@ -6,8 +6,12 @@ new Vue({
   delimiters: ['${', '}'],
   data: {
     departments: [],
+    selectedDepartment: {
+      id: '',
+      name: '',
+    }
   },
-  mounted: function() {
+  mounted: function () {
     this.getDepartments();
   },
   methods: {
@@ -20,5 +24,28 @@ new Vue({
           console.log(error);
         });
     },
+    getSelectedDepartment: function(department_id) {
+      axios.get(`/api/department/${department_id}/`)
+        .then((response) => {
+          const data = response.data;
+          this.selectedDepartment = {
+            id: data.id,
+            name: data.name,
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    updateDepartment: function() {
+      axios.put(`/api/department/${this.selectedDepartment.id}/`, this.selectedDepartment)
+        .then((response) => {
+          $('#departmentEditModal').modal('toggle');
+          this.getDepartments();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 });
