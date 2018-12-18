@@ -42,7 +42,7 @@ new Vue({
           this.departments = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
     getJobTitles: function() {
@@ -51,7 +51,7 @@ new Vue({
           this.jobTitles = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
     searchEmployees: function() {
@@ -60,7 +60,7 @@ new Vue({
           this.employees = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
     getSelectedEmployee: function(employee_id) {
@@ -82,33 +82,33 @@ new Vue({
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
-    saveEmployeeInfo: function() {
+    updateEmployee: function() {
       axios.put(`/api/employee/${this.selectedEmployee.id}/`, this.selectedEmployee)
         .then((response) => {
           $('#employeeDetailsModal').modal('toggle');
           this.searchEmployees();
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
-    deleteEmployeeInfo: function() {
+    deleteEmployee: function() {
       axios.delete(`/api/employee/${this.selectedEmployee.id}/`)
         .then((response) => {
-            $('#deleteConfirmationModal').modal('toggle');
+            $('#employeeDeleteModal').modal('toggle');
             this.searchEmployees();
           })
           .catch((error) => {
-            console.log(error);
+            console.log(error.response);
           });
     },
-    addNewEmployee: function() {
+    addEmployee: function() {
       axios.post('/api/employee/', this.newEmployee)
         .then((response) => {
-          $('#addEmployeeModal').modal('toggle');
+          $('#employeeAddModal').modal('toggle');
           this.newEmployee = {
             first_name: '',
             last_name: '',
@@ -118,7 +118,7 @@ new Vue({
           };
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
     getToday: function () {

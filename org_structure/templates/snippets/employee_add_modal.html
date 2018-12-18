@@ -1,30 +1,31 @@
-<div class="modal fade" id="employeeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="employeeDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="employeeAddModal" tabindex="-1" role="dialog" aria-labelledby="employeeAddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="employeeDetailsModalLabel">Employee Details</h5>
+                <h5 class="modal-title" id="employeeAddModalLabel">Add a New Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="saveEmployeeInfo">
+                <form @submit.prevent="addEmployee">
                     <div class="form-group row">
                         <label for="first-name" class="col-3 col-form-label">First name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="first-name" v-model="selectedEmployee.first_name" required>
+                            <input type="text" class="form-control" id="first-name" v-model="newEmployee.first_name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="last-name" class="col-3 col-form-label">Last name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="last-name" v-model="selectedEmployee.last_name" required>
+                            <input type="text" class="form-control" id="last-name" v-model="newEmployee.last_name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="department" class="col-3 col-form-label">Department:</label>
                         <div class="col-9">
-                            <select v-model="selectedEmployee.department" class="form-control" id="department" required>
+                            <select v-model="newEmployee.department" class="form-control" id="department" required>
+                                <option disabled value="">---------</option>
                                 <option v-for="department in departments" :value="department.id">
                                     ${department.name}
                                 </option>
@@ -34,8 +35,9 @@
                     <div class="form-group row">
                         <label for="job-title" class="col-3 col-form-label">Job title:</label>
                         <div class="col-9">
-                            <select v-model="selectedEmployee.job_title" class="form-control" id="job-title" required>
-                                <option v-for="jobTitle in jobTitles" :value="jobTitle.id" >
+                            <select v-model="newEmployee.job_title" class="form-control" id="job-title" required>
+                                <option disabled value="">---------</option>
+                                <option v-for="jobTitle in jobTitles" :value="jobTitle.id">
                                     ${jobTitle.name}
                                 </option>
                             </select>
@@ -44,20 +46,10 @@
                     <div class="form-group row">
                         <label for="join-date" class="col-3 col-form-label">Join date:</label>
                         <div class="col-9">
-                            <input type="date" class="form-control" id="join-date" v-model="selectedEmployee.join_date" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="left-date" class="col-3 col-form-label">Left date:</label>
-                        <div class="col-9">
-                            <input type="date" class="form-control" id="left-date" v-model="selectedEmployee.left_date">
+                            <input type="date" class="form-control" id="join-date" v-model="newEmployee.join_date" required>
                         </div>
                     </div>
                     <div class="modal-footer pl-0 pr-0 pb-0">
-                        <button type="button" class="btn btn-danger float-left" data-dismiss="modal" data-toggle="modal" data-target="#deleteConfirmationModal">
-                            Delete
-                        </button>
-                        <div class="flex-grow-1"></div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
