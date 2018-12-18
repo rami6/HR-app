@@ -18,8 +18,12 @@
                         <tr v-for="department in departments">
                             <td class="align-middle">${department.name}</td>
                             <td class="text-right">
-                                <button class="btn btn-dark" @click="getSelectedDepartment(department.id)" data-toggle="modal" data-target="#departmentEditModal"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger" @click="getSelectedDepartment(department.id)"><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-dark" @click="getSelectedDepartment(department.id)" data-toggle="modal" data-target="#departmentEditModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger" @click="getSelectedDepartment(department.id)" data-toggle="modal" data-target="#departmentDeleteModal">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -28,6 +32,7 @@
             <div class="col-3"></div>
         </div>
         {% include 'snippets/department_edit_modal.html' %}
+        {% include 'snippets/department_delete_modal.html' %}
     </div>
 {% endblock content %}
 

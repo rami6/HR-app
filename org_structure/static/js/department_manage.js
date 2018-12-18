@@ -9,10 +9,16 @@ new Vue({
     selectedDepartment: {
       id: '',
       name: '',
-    }
+    },
+    errorMessage: null,
   },
   mounted: function () {
     this.getDepartments();
+
+    const vueThis = this;
+    $('#departmentDeleteModal').on('hidden.bs.modal', function (e) {
+      vueThis.errorMessage = null;
+    })
   },
   methods: {
     getDepartments: function () {
@@ -21,7 +27,7 @@ new Vue({
           this.departments = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
     getSelectedDepartment: function(department_id) {
@@ -34,7 +40,7 @@ new Vue({
           };
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
     updateDepartment: function() {
@@ -44,7 +50,22 @@ new Vue({
           this.getDepartments();
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
+        });
+    },
+    deleteDepartment: function () {
+      axios.delete(`/api/department/${this.selectedDepartment.id}/`)
+        .then((response) => {
+          $('#departmentDeleteModal').modal('toggle');
+          this.getDepartments();
+        })
+        .catch((error) => {
+          console.log(error.response);
+          if (error.response.data.split(' ')[0] === "ProtectedError") {
+            this.errorMessage = 'Cannot delete the department because it is referenced through a protected foreign key.';
+          } else {
+            this.errorMessage = 'Error.';
+          }
         });
     }
   }
