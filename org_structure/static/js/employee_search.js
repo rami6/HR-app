@@ -22,7 +22,6 @@ new Vue({
   },
   mounted: function() {
     this.getDepartments();
-    this.getJobTitles();
     this.newEmployee.join_date = this.getToday();
   },
   methods: {
@@ -35,22 +34,29 @@ new Vue({
           console.log(error.response);
         });
     },
-    getJobTitles: function() {
-      axios.get('/api/job-title/')
-        .then((response) => {
-          this.jobTitles = response.data;
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    },
     showJobTitleOptions: function() {
-      document.querySelector('#job-title-options').removeAttribute('style');
+      this.searchJobTitleOptions();
+      document.querySelector('#job-title-options-add').removeAttribute('style');
+      document.querySelector('#job-title-options-edit').removeAttribute('style');
     },
     hideJobTitleOptions: function () {
+      if (this.jobTitles.length === 0) {
+        this.selectedJobTitle = null;
+      }
+
+      for (let i = 0; i < this.jobTitles.length; i++) {
+        if (this.jobTitles[i].name === this.jobTitleKeyword) {
+          this.selectedJobTitle = this.jobTitles[i].id;
+          break;
+        } else if (i === this.jobTitles.length - 1) {
+          this.selectedJobTitle = null;
+        }
+      }
+
       setTimeout(
-        function() {
-          document.querySelector('#job-title-options').setAttribute('style', 'display: none;')
+        function () {
+          document.querySelector('#job-title-options-add').setAttribute('style', 'display: none;')
+          document.querySelector('#job-title-options-edit').setAttribute('style', 'display: none;')
         }, 300
       )
     },
@@ -79,16 +85,36 @@ new Vue({
     },
     getSelectedEmployee: function(employee) {
       this.selectedEmployee = employee;
+      this.jobTitleKeyword = employee.job_title_name;
+      this.selectedJobTitle = employee.job_title;
     },
     updateEmployee: function() {
-      const data = {
+      this.hideJobTitleOptions();
+      let data = {
         first_name: this.selectedEmployee.first_name,
         last_name: this.selectedEmployee.last_name,
         department: this.selectedEmployee.department,
-        job_title: this.selectedEmployee.job_title,
+        job_title: this.selectedJobTitle,
         join_date: this.selectedEmployee.join_date,
         left_date: this.selectedEmployee.left_date,
       };
+      if (data.left_date === '') {
+        data.left_date = null;
+      }
+      if (!data.job_title) {
+        axios.post('/api/job-title/', {name: this.jobTitleKeyword})
+          .then((response) => {
+            data.job_title = response.data.id;
+            this.putEmployee(data);
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+      } else {
+        this.putEmployee(data);
+      }
+    },
+    putEmployee: function(data) {
       axios.put(`/api/employee/${this.selectedEmployee.id}/`, data)
         .then((response) => {
           $('#employeeDetailsModal').modal('toggle');
@@ -109,6 +135,7 @@ new Vue({
           });
     },
     addEmployee: function() {
+      this.hideJobTitleOptions();
       if (!this.selectedJobTitle) {
         axios.post('/api/job-title/', {name: this.jobTitleKeyword})
           .then((response) => {
@@ -136,7 +163,6 @@ new Vue({
           };
           this.newEmployee.join_date = this.getToday();
           this.jobTitleKeyword = '';
-          this.getJobTitles();
           this.selectJobTitle = null;
         })
         .catch((error) => {

@@ -1,4 +1,4 @@
-<div class="modal fade" id="employeeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="employeeDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="employeeDetailsModal" class="editable" tabindex="-1" role="dialog" aria-labelledby="employeeDetailsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -34,11 +34,13 @@
                     <div class="form-group row">
                         <label for="job-title" class="col-3 col-form-label">Job title:</label>
                         <div class="col-9">
-                            <select v-model="selectedEmployee.job_title" class="form-control" id="job-title" required>
-                                <option v-for="jobTitle in jobTitles" :value="jobTitle.id" >
+                            <input type="text" v-model="jobTitleKeyword" class="form-control" id="job-title" autocomplete="off"
+                                   @keyup="searchJobTitleOptions" @focus="showJobTitleOptions" @blur="hideJobTitleOptions" required>
+                            <div id="job-title-options-edit" class="autocomplete-items" style="display: none;">
+                                <div v-for="jobTitle in jobTitles" @click="selectJobTitle(jobTitle)" class="pl-1 pr-1 autocomplete-item">
                                     ${jobTitle.name}
-                                </option>
-                            </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

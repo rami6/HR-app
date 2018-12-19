@@ -31,7 +31,7 @@
                     </div>
                 </form>
                 <div id="employee-list">
-                    <div class="row pt-1 pb-1" v-for="employee in employees" class="flex-grow-1" data-toggle="modal" data-target="#employeeDetailsModal" @click="getSelectedEmployee(employee)">
+                    <div class="row pt-1 pb-1 employee-row" v-for="employee in employees" class="flex-grow-1" data-toggle="modal" data-target="#employeeDetailsModal" @click="getSelectedEmployee(employee)">
                         <div class="col-4">${employee.first_name} ${employee.last_name}</div>
                         <div class="col-4">${employee.department_name}</div>
                         <div class="col-4">${employee.job_title_name}</div>

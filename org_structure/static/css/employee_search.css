@@ -6,6 +6,10 @@ html, body, #content {
     overflow-y: auto;
 }
 
+.employee-row {
+    cursor: pointer;
+}
+
 .autocomplete-items {
     position: absolute;
     border: 1px solid #d4d4d4;
