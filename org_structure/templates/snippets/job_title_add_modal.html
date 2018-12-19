@@ -1,18 +1,18 @@
-<div class="modal fade" id="departmentAddModal" tabindex="-1" role="dialog" aria-labelledby="departmentAddModalLabel" aria-hidden="true">
+<div class="modal fade" id="jobTitleAddModal" tabindex="-1" role="dialog" aria-labelledby="jobTitleAddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="departmentAddModalLabel">Add a Department</h5>
+                <h5 class="modal-title" id="jobTitleAddModalLabel">Add a Job Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="addDepartment">
+                <form @submit.prevent="addJobTitle">
                     <div class="form-group row">
                         <label for="name" class="col-3 col-form-label">Name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="name" v-model="newDepartment.name" autocomplete="off" required>
+                            <input type="text" class="form-control" id="name" v-model="newJobTitle.name" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="modal-footer pl-0 pr-0 pb-0">
