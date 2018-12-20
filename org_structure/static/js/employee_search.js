@@ -20,6 +20,7 @@ new Vue({
     keyword: '',
     jobTitleKeyword: '',
     filterDepartments: [],
+    filterStatus: ['working'],
   },
   mounted: function() {
     this.searchEmployees();
@@ -29,7 +30,16 @@ new Vue({
   methods: {
     searchEmployees: function() {
       this.selectedJobTitle = null;
-      axios.get(`/api/employee/?name=${this.keyword}&department=${this.filterDepartments}`)
+      let workingKey = '';
+      if (this.filterStatus.length === 1) {
+        if (this.filterStatus[0] === 'working') {
+          workingKey = true;
+        } else {
+          workingKey = false;
+        }
+      }
+
+      axios.get(`/api/employee/?name=${this.keyword}&department=${this.filterDepartments}&working=${workingKey}`)
         .then((response) => {
           this.employees = response.data;
         })

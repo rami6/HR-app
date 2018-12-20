@@ -30,7 +30,3 @@ html, body, #content {
 .autocomplete-item:hover {
     background: #dddddd;
 }
-
-#job-title-manage-link {
-    position: relative;
-}

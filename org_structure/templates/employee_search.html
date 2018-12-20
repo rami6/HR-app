@@ -23,6 +23,20 @@
                 {% if request.user.is_superuser %}
                 <div><a href="{% url 'department_manage' %}" target="_blank">Manage departments</a></div>
                 {% endif %}
+
+                <div class="mt-3">Status</div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="working" id="id-working" v-model="filterStatus" @change="searchEmployees">
+                    <label class="form-check-label" for="id-working">
+                        Working
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="left" id="id-left" v-model="filterStatus" @change="searchEmployees">
+                    <label class="form-check-label" for="id-left">
+                        Left
+                    </label>
+                </div>
             </div>
             <div class="col-8 d-flex flex-column flex-grow-1">
                 <form @submit.prevent>

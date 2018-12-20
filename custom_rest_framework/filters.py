@@ -10,6 +10,7 @@ class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
 class EmployeeFilter(filters.FilterSet):
     name = filters.CharFilter(method='filter_full_name')
     department = NumberInFilter(field_name="department__id", lookup_expr='in')
+    working = filters.BooleanFilter(field_name='left_date', lookup_expr='isnull')
 
     class Meta:
         model = Employee
