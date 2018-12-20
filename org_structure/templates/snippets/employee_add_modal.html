@@ -35,6 +35,7 @@
                     <div class="form-group row">
                         <label for="job-title" class="col-3 col-form-label">Job title:</label>
                         <div class="col-9">
+                            <div class="text-right"><a href="{% url 'job_title_manage' %}" target="_blank">Manage job titles</a></div>
                             <input type="text" v-model="jobTitleKeyword" class="form-control" id="job-title" autocomplete="off"
                                    @keyup="searchJobTitleOptions" @focus="showJobTitleOptions" @blur="hideJobTitleOptions" required>
                             <div id="job-title-options-add" class="autocomplete-items" style="display: none;">
