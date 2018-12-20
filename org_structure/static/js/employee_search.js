@@ -19,15 +19,17 @@ new Vue({
     selectedEmployee: {},
     keyword: '',
     jobTitleKeyword: '',
+    filterDepartments: [],
   },
   mounted: function() {
+    this.searchEmployees();
     this.getDepartments();
     this.newEmployee.join_date = this.getToday();
   },
   methods: {
     searchEmployees: function() {
       this.selectedJobTitle = null;
-      axios.get(`/api/employee/?search=${this.keyword}`)
+      axios.get(`/api/employee/?name=${this.keyword}&department=${this.filterDepartments}`)
         .then((response) => {
           this.employees = response.data;
         })
