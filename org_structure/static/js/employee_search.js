@@ -29,7 +29,6 @@ new Vue({
   },
   methods: {
     searchEmployees: function() {
-      this.selectedJobTitle = null;
       let workingKey = '';
       if (this.filterStatus.length === 1) {
         if (this.filterStatus[0] === 'working') {
@@ -42,6 +41,7 @@ new Vue({
       axios.get(`/api/employee/?name=${this.keyword}&department=${this.filterDepartments}&working=${workingKey}`)
         .then((response) => {
           this.employees = response.data;
+          this.selectedJobTitle = null;
         })
         .catch((error) => {
           console.log(error.response);
@@ -101,7 +101,6 @@ new Vue({
       this.jobTitleKeyword = jobTitle.name;
     },
     addEmployee: function() {
-      this.hideJobTitleOptions();
       // Create job title first if the job title doesn't exist
       if (!this.selectedJobTitle) {
         axios.post('/api/job-title/', {name: this.jobTitleKeyword})
@@ -130,6 +129,7 @@ new Vue({
           };
           this.newEmployee.join_date = this.getToday();
           this.jobTitleKeyword = '';
+          this.searchEmployees();
           this.selectJobTitle = null;
         })
         .catch((error) => {
@@ -137,7 +137,6 @@ new Vue({
         });
     },
     updateEmployee: function() {
-      this.hideJobTitleOptions();
       let data = {
         first_name: this.selectedEmployee.first_name,
         last_name: this.selectedEmployee.last_name,
@@ -168,6 +167,7 @@ new Vue({
         .then((response) => {
           $('#employeeDetailsModal').modal('toggle');
           this.searchEmployees();
+          this.selectJobTitle = null;
         })
         .catch((error) => {
           console.log(error.response);
