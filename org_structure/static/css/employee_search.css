@@ -13,7 +13,6 @@ html, body, #content {
 .autocomplete-items {
     position: absolute;
     border: 1px solid #d4d4d4;
-    border-bottom: none;
     border-top: none;
     z-index: 99;
     top: 100%;
@@ -21,7 +20,6 @@ html, body, #content {
     right: 15px;
     background: white;
     max-height: 150px;
-    min-height: 60px;
     overflow-y: auto;
 }
 
