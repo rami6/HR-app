@@ -44,7 +44,7 @@ N/A
 
 [Regular user]
 
-<img width="1205" alt="screen shot 2019-02-17 at 2 50 05 pm" src="https://user-images.githubusercontent.com/30137645/52921491-98377800-32cc-11e9-9486-4461f260fe99.png">
+<img width="1207" alt="screen shot 2019-02-17 at 5 00 01 pm" src="https://user-images.githubusercontent.com/30137645/52922468-61fef600-32d6-11e9-810d-0471941153c2.png">
 
 ### Manage Departments / Job Titles
 [Superuser]
