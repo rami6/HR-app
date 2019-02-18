@@ -37,7 +37,7 @@ N/A
 - Jump to a view for managing job titles by clicking the link.
 
 
-### View and/or Edit Employee 
+### View and Edit Employee 
 [Superuser]
 
 <img width="1175" alt="screen shot 2019-02-17 at 2 47 35 pm" src="https://user-images.githubusercontent.com/30137645/52921478-87870200-32cc-11e9-948d-62e620740485.png">
@@ -45,6 +45,8 @@ N/A
 [Regular user]
 
 <img width="1207" alt="screen shot 2019-02-17 at 5 00 01 pm" src="https://user-images.githubusercontent.com/30137645/52922468-61fef600-32d6-11e9-810d-0471941153c2.png">
+
+- Read only for regular user.
 
 ### Manage Departments / Job Titles
 [Superuser]
